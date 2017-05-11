@@ -4,12 +4,12 @@ import functionality.*;
 import processing.core.PApplet;
 
 public class GameObject {
-	int x, y;
+	double x, y;
 	double velX, velY;
 	double r, angle;
 	int centX, centY;
 	
-	public GameObject(int x, int y, Game g){
+	public GameObject(double x, double y, Game g){
 		setPos(x, y);
 		centX = g.getCentX();
 		centY = g.getCentY();
@@ -19,10 +19,10 @@ public class GameObject {
 		double newX, newY = 0;
 		newX = centX+rad*Math.cos(theta);
 		newY = centY+rad*Math.sin(theta);
-		setPos((int)newX, (int)newY);
+		setPos(newX, newY);
 	}
 	
-	public void setPos(int x, int y){
+	public void setPos(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
@@ -41,7 +41,9 @@ public class GameObject {
 	}
 	
 	public void draw(PApplet p){
-		
+		p.ellipseMode(p.CENTER);
+		p.fill(255);
+		p.ellipse(centX+(float)(x/(Math.pow(10, 7))), centY+(float)(y/(Math.pow(10, 7))), 30, 30);
 	}
 	
 }
