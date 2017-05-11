@@ -21,10 +21,14 @@ public class Main {
 		window.setLocation(0,0);
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
 		window.setResizable(true);
 		
 		GameHUD hud = new GameHUD();
 		window.add(hud);
+=======
+		window.setResizable(false);
+>>>>>>> branch 'master' of https://github.com/enarad383/AirspaceBalls.git
 
 		window.setVisible(true);
 	}

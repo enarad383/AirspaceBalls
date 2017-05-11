@@ -26,6 +26,10 @@ public class GameObject {
 		this.x = x;
 		this.y = y;
 	}
+	public void changePos(double x, double y){
+		this.x += x;
+		this.y += y;
+	}
 	
 	public void setVel(double x, double y){
 		this.velX = x;
