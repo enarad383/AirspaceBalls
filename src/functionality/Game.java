@@ -1,11 +1,13 @@
 package functionality;
 
+import gameplayObjects.*;
 import processing.core.PApplet;
 
 public class Game extends PApplet{
 	
 	private final int centerX = width/2;
 	private final int centerY = height/2;
+	private Sun sun;
 	
 	public Game(){
 		super();
@@ -24,5 +26,9 @@ public class Game extends PApplet{
 	}
 	public void draw(){
 		background(0);
+	}
+	
+	public Sun getSun(){
+		return sun;
 	}
 }

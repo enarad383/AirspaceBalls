@@ -19,7 +19,7 @@ public class Main {
 		window.setLocation(0,0);
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(true);
+		window.setResizable(false);
 
 		window.setVisible(true);
 	}
