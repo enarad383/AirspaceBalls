@@ -18,7 +18,7 @@ public class Sun extends GameObject{
 	}
 	
 	public void draw(PApplet p){
-		super.draw(p);
+		p.fill(255);
 	}
 
 }

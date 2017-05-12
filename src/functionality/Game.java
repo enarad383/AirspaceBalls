@@ -26,17 +26,18 @@ public class Game extends PApplet{
 	}
 	
 	public void setup(){
-		
+		background(0);
 		sun = new Sun(this, 190);
-		proj = new Projectile(300, 0, this, 0, 0);
-		planets.add(new Planet(100, 0, this, 6, 10));
-		planets.add(new Planet(400, 0, this, 9, 20));
+		proj = new Projectile(0, 300, this, -3.5, 0);
+		planets.add(new Planet(100, 1, this, 6, 10));
+		planets.add(new Planet(400, -2, this, 9, 20));
 		planets.add(new Planet(250, 0, this, 7, 15));
 	}
 	public void draw(){
-		background(0);
+		
 		translate(getCentX(),getCentY());
 		sun.draw(this);
+		ellipse(0, 0, 30, 30);
 		proj.draw(this);
 		proj.orbit(planets);
 		for (Planet p: planets){
