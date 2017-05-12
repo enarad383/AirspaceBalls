@@ -1,6 +1,7 @@
 package gameplayObjects;
 
 import functionality.Game;
+import processing.core.PApplet;
 
 public class Sun extends GameObject{
 	
@@ -14,6 +15,10 @@ public class Sun extends GameObject{
 	
 	public double getMass(){
 		return mass;
+	}
+	
+	public void draw(PApplet p){
+		super.draw(p);
 	}
 
 }

@@ -16,7 +16,7 @@ public class Main {
 		PSurfaceAWT surf = (PSurfaceAWT) game.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();
 		JFrame window = (JFrame)canvas.getFrame();
-		window.setSize(1920, 1040);
+		window.setSize(1000, 1000);
 		window.setMinimumSize(new Dimension(100,100));
 		
 		window.setLocation(0,0);

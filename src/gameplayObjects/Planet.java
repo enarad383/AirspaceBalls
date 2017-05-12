@@ -16,7 +16,7 @@ public class Planet extends GameObject {
 		orbitHeight = radius;
 		this.size = size;
 		gravAccel = grav;
-		orbitVelAngular = Math.sqrt(Physics.GRAVCONST*g.getSun().getMass()/Math.pow(orbitHeight, 2));
+		orbitVelAngular = 5*Math.sqrt(Physics.GRAVCONST*g.getSun().getMass()/Math.pow(orbitHeight, 3));
 		this.angle = angle;
 		setPosPolar(orbitHeight, angle);
 	}
@@ -26,10 +26,14 @@ public class Planet extends GameObject {
 		setPosPolar(orbitHeight, angle);
 	}
 	
+	public double getMass(){
+		return gravAccel;
+	}
+	
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
 		p.fill(200,200,150);
-		p.ellipse(centX+(float)(x/Math.pow(10, 9)), centY+(float)(y/Math.pow(10, 9)), (float)size, (float)size);
+		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
 	}
 
 }

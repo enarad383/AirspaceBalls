@@ -8,17 +8,19 @@ public class GameObject {
 	double velX, velY;
 	double r, angle;
 	int centX, centY;
+	Game game;
 	
 	public GameObject(double x, double y, Game g){
 		setPos(x, y);
 		centX = g.getCentX();
 		centY = g.getCentY();
+		game = g;
 	}
 	
 	public void setPosPolar(double rad, double theta){
 		double newX, newY = 0;
-		newX = centX+rad*Math.cos(theta);
-		newY = centY+rad*Math.sin(theta);
+		newX = rad*Math.cos(theta);
+		newY = rad*Math.sin(theta);
 		setPos(newX, newY);
 	}
 	
@@ -39,11 +41,24 @@ public class GameObject {
 		this.velX += x;
 		this.velY += y;
 	}
+	public void act(){
+		x+=velX;
+		y+=velY;
+	}
+	public double distanceTo(GameObject other){
+		return Math.sqrt(Math.pow(other.x-x, 2)+Math.pow(other.y-y, 2));
+	}
+	public double distToX(GameObject other){
+		return x-other.x;
+	}
+	public double distToY(GameObject other){
+		return y-other.y;
+	}
 	
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
 		p.fill(255);
-		p.ellipse(centX+(float)(x/(Math.pow(10, 7))), centY+(float)(y/(Math.pow(10, 7))), 30, 30);
+		p.ellipse((float)(x), (float)(y), 30, 30);
 	}
 	
 }
