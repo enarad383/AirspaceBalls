@@ -11,11 +11,13 @@ public class Game extends PApplet{
 	private Sun sun;
 	private ArrayList<Planet> planets;
 	private Projectile proj;
+	boolean isPaused;
 	
 	public Game(){
 		super();
 		runSketch();
 		planets = new ArrayList<Planet>();
+		isPaused = false;
 	}
 	
 	public int getCentX(){
@@ -26,24 +28,40 @@ public class Game extends PApplet{
 	}
 	
 	public void setup(){
-		background(0);
+		
 		sun = new Sun(this, 190);
-		proj = new Projectile(0, 300, this, -3.5, 0);
-		planets.add(new Planet(100, 1, this, 6, 10));
-		planets.add(new Planet(400, -2, this, 9, 20));
+		background(0);
+		planets.add(new Planet(100, 1, this, 2, 10));
+		planets.add(new Planet(400, Math.PI/2, this, 15, 20));
+		//planets.add(new Planet(300, 0, this, 15, 20));
 		planets.add(new Planet(250, 0, this, 7, 15));
+		proj = new Projectile(-300, 0, this, 0, -2.5);
 	}
 	public void draw(){
-		
-		translate(getCentX(),getCentY());
-		sun.draw(this);
-		ellipse(0, 0, 30, 30);
-		proj.draw(this);
-		proj.orbit(planets);
-		for (Planet p: planets){
-			p.draw(this);
-			p.orbit();
+		if (!isPaused){
+			translate(getCentX(),getCentY());
+			sun.draw(this);
+			ellipse(0, 0, 30, 30);
+			proj.orbit(planets);
+			proj.draw(this);
+
+			for (Planet p: planets){
+				p.draw(this);
+				p.orbit();
+			}
 		}
+		if (keyPressed){
+			if (key == ' '){
+				isPaused = !isPaused;
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 	
 	public Sun getSun(){

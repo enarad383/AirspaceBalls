@@ -8,7 +8,7 @@ public class Sun extends GameObject{
 	private double mass;
 
 	public Sun(Game g, double mass) {
-		super(g.getCentX(), g.getCentY(), g);
+		super(0, 0, g);
 		this.mass = mass;
 		// TODO Auto-generated constructor stub
 	}

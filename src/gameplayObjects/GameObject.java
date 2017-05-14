@@ -4,11 +4,11 @@ import functionality.*;
 import processing.core.PApplet;
 
 public class GameObject {
-	double x, y;
-	double velX, velY;
-	double r, angle;
-	int centX, centY;
-	Game game;
+	protected double x, y;
+	protected double velX, velY;
+	private double r, angle;
+	private int centX, centY;
+	protected Game game;
 	
 	public GameObject(double x, double y, Game g){
 		setPos(x, y);
@@ -89,6 +89,7 @@ public class GameObject {
 		else if (distToY(other)>0){
 			ans += 2*Math.PI;
 		}
+		
 		return ans;
 	}
 	
@@ -108,6 +109,14 @@ public class GameObject {
 	 */
 	public double distToX(GameObject other){
 		return other.x-x;
+	}
+	
+	public double getX(){
+		return x;
+	}
+	
+	public double getY(){
+		return y;
 	}
 	
 	/**Gets the Y component of the distance vector between this and another gameObject.

@@ -45,6 +45,10 @@ public class Planet extends GameObject {
 		return gravAccel;
 	}
 	
+	public double getVel(){
+		return orbitVelAngular*orbitHeight;
+	}
+	
 	/**
 	 * Draws the planet using Processing.
 	 */
