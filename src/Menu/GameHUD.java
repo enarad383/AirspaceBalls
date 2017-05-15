@@ -1,9 +1,11 @@
-package functionality;
+package Menu;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 
 import javax.swing.*;
+
+import functionality.Main;
 
 import java.util.*;
 
