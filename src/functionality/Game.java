@@ -46,7 +46,7 @@ public class Game extends PApplet{
 		if (gamePage == 0){
 			menuScreen();
 		} else if (gamePage == 1){
-			//background(0);
+			
 			gameScreen();
 		}
 		
