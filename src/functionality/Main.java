@@ -24,12 +24,6 @@ public class Main {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		window.setResizable(true);
-		
-	////	GameHUD hud = new GameHUD();
-	//	window.add(hud);
-
-		window.setResizable(true);
-
 
 		window.setVisible(true);
 	}
