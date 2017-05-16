@@ -107,12 +107,6 @@ public class Game extends PApplet{
 			}
 			can.orbit();
 			can.draw(this);
-			if (isDebug){
-				fill(255);
-				textAlign(LEFT);
-				text ("Can vX = " + can.getVelX(), -400, -400);
-				text ("Can vY = " + can.getVelY(), -400, -380);
-			}
 			
 		}
 		if (keyPressed){
