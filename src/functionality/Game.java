@@ -12,12 +12,16 @@ public class Game extends PApplet{
 	private ArrayList<Planet> planets;
 	private Projectile proj;
 	boolean isPaused;
+	private int gamePage;
 	
 	public Game(){
 		super();
 		runSketch();
 		planets = new ArrayList<Planet>();
 		isPaused = false;
+		gamePage = 0;
+		
+		
 	}
 	
 	public int getCentX(){
@@ -38,6 +42,38 @@ public class Game extends PApplet{
 		proj = new Projectile(-300, 0, this, 0, -2.5);
 	}
 	public void draw(){
+		
+		if (gamePage == 0){
+			menuScreen();
+		} else if (gamePage == 1){
+			gameScreen();
+		}
+		
+		
+		if (keyPressed){
+			if (key == '5'){
+				gamePage = 1;
+			} else if (key == '6'){
+				gamePage = 0;
+			}
+		}
+		
+
+	}
+	
+	public Sun getSun(){
+		return sun;
+	}
+	
+	
+	public void menuScreen(){
+		background(0);
+		textAlign(CENTER);
+		text("Press 5 to start", height/2, width/2);
+	}
+	
+	public void gameScreen(){
+		background(0);
 		if (!isPaused){
 			translate(getCentX(),getCentY());
 			sun.draw(this);
@@ -61,10 +97,18 @@ public class Game extends PApplet{
 				}
 			}
 		}
-
+	
+	
+	
 	}
 	
-	public Sun getSun(){
-		return sun;
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

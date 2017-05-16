@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import javax.swing.*;
 
 import functionality.Game;
-import functionality.Main;
+
 
 import java.util.*;
 
