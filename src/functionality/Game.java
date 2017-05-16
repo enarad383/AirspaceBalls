@@ -150,7 +150,7 @@ public class Game extends PApplet{
 	
 	public void mousePressed(){
 		
-		if (mouseButton == LEFT && but1.onRect()){
+		if (mouseButton == LEFT || but1.onRect()){
 			gamePage = 1;
 		}
 		
