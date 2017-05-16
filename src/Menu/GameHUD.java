@@ -13,13 +13,17 @@ import java.util.*;
 
 public class GameHUD extends Game 
 {
-
+	
 	
 	
 
 
 	public void paintComponent(Graphics g)
 	{
+		
+	}
+	
+	public void draw(){
 		
 	}
 
