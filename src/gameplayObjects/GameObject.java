@@ -9,12 +9,14 @@ public class GameObject {
 	private double r, angle;
 	private int centX, centY;
 	protected Game game;
+	private boolean isVisible;
 	
 	public GameObject(double x, double y, Game g){
 		setPos(x, y);
 		centX = g.getCentX();
 		centY = g.getCentY();
 		game = g;
+		isVisible = true;
 	}
 	
 	/** Uses polar coordinates to set the position of the object.
@@ -119,6 +121,22 @@ public class GameObject {
 		return y;
 	}
 	
+	public double getVelX(){
+		return velX;
+	}
+	
+	public double getVelY(){
+		return velY;
+	}
+	
+	public boolean isVisible(){
+		return isVisible;
+	}
+	
+	public void setVisible(boolean is){
+		isVisible = is;
+	}
+	
 	/**Gets the Y component of the distance vector between this and another gameObject.
 	 * 
 	 * @param other The other gameObject to find the y distance to.
@@ -129,9 +147,11 @@ public class GameObject {
 	}
 	
 	public void draw(PApplet p){
-		p.ellipseMode(p.CENTER);
-		p.fill(255);
-		p.ellipse((float)(x), (float)(y), 30, 30);
+		if (isVisible){
+			p.ellipseMode(p.CENTER);
+			p.fill(255);
+			p.ellipse((float)(x), (float)(y), 30, 30);
+		}
 	}
 	
 }

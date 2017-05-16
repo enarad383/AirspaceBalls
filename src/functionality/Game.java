@@ -14,6 +14,7 @@ public class Game extends PApplet{
 	private Sun sun;
 	private ArrayList<Planet> planets;
 	private Projectile proj;
+	private Cannon can;
 
 	private boolean isPaused;
 	private boolean isDebug;
@@ -47,12 +48,13 @@ public class Game extends PApplet{
 	public void setup(){
 		
 		sun = new Sun(this, 190);
-		
+		can = new Cannon(200, 50, this, 1);
 		planets.add(new Planet(125, 1, this, 2, 10));
 	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
 		planets.add(new Planet(400, 0, this, 15, 20));
 		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
 		proj = new Projectile(-300, 0.0, this, 0, -3.25);
+		proj.setVisible(false);
 	}
 	
 	public void setDebug(){
@@ -99,6 +101,15 @@ public class Game extends PApplet{
 				p.draw(this);
 				p.orbit();
 			}
+			can.orbit();
+			can.draw(this);
+			if (isDebug){
+				fill(255);
+				textAlign(LEFT);
+				text ("Can vX = " + can.getVelX(), -400, -400);
+				text ("Can vY = " + can.getVelY(), -400, -380);
+			}
+			
 		}
 		if (keyPressed){
 			if (key == 'p'){
@@ -112,21 +123,28 @@ public class Game extends PApplet{
 				setDebug();
 			}
 			if (keyCode == UP){
-				
+				can.changePower(true);
 			}
 			if (keyCode == DOWN){
-				
+				can.changePower(false);
 			}
 			if (keyCode == LEFT){
-				
+				can.aim(false);
 			}
 			if (keyCode == RIGHT){
-				
+				can.aim(true);
+			}
+			if (key == ' '){
+				fireProjectile();
 			}
 		}
+	}
 	
-	
-	
+	public void fireProjectile(){
+		proj.setVisible(true);
+		proj = new Projectile(can.getX(), can.getY(), this, 
+				can.getVelX()+can.getPower()*Math.cos(can.getAimAngle()),
+				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle()));
 	}
 	
 	

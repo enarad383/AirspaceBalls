@@ -8,7 +8,7 @@ import processing.core.PApplet;
 public class Projectile extends GameObject{
 	
 	private double xAccel, yAccel;
-	private double gravMult = 23.5;
+	private double gravMult = 11.75*1.5;
 	private ArrayList<Planet>planets;
 
 	/**Constructs a Projectile object.
@@ -49,8 +49,8 @@ public class Projectile extends GameObject{
 				accelX -= tempaccel*Math.cos(tempAngle);
 				accelY -= tempaccel*Math.sin(tempAngle);
 			}
-		for (Planet p: planets){ //PROBLEM: Can't seem to properly add forces at certain angles
-			tempaccel = 2*gravMult*(Physics.GRAVCONST*p.getMass()/Math.pow(distanceTo(p), 2));
+		for (Planet p: planets){ 
+			tempaccel = 3*gravMult*(Physics.GRAVCONST*p.getMass()/Math.pow(distanceTo(p), 2));
 			tempAngle = getAngleTo(p);
 			if (Math.abs(Math.signum(Math.cos(getAngleTo(p)))-Math.signum(Math.sin(getAngleTo(p))))<0.1){ //if in QI or QIII
 			//if (Math.cos(getAngleTo(p))>0){
@@ -84,33 +84,35 @@ public class Projectile extends GameObject{
 	 * 
 	 */
 	public void draw(PApplet p){
-		p.ellipseMode(p.CENTER);
-		p.stroke(255,100,0);
-		p.fill(255,0,0);
-		p.ellipse((float)(x), (float)(y), 10, 10);
-		p.fill(0, 255, 0);
-		p.stroke(255,255,0);
-		p.strokeWeight(1);
-		
-		if (game.isDebug()){
-			p.ellipse((float)(x+1000*xAccel), (float)(y+1000*yAccel), 5, 5);
-			p.line((float)x, (float)y, (float)(x+10000*xAccel), (float)(y+10000*yAccel));
+		if (isVisible()){
+			p.ellipseMode(p.CENTER);
+			p.stroke(255,100,0);
+			p.fill(255,0,0);
+			p.ellipse((float)(x), (float)(y), 10, 10);
+			p.fill(0, 255, 0);
+			p.stroke(255,255,0);
 			p.strokeWeight(1);
-			for (Planet plan: planets){
-				p.stroke (0, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
-				p.line((float)x, (float)y, (float)plan.getX(), (float)plan.getY());
-				p.stroke(100, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
-				p.strokeWeight(3);
-				if (Math.abs(Math.signum(Math.cos(getAngleTo(plan)))-Math.signum(Math.sin(getAngleTo(plan))))<0.1){
-					p.line((float)x, (float)y, (float)x-(float)(100*Math.sin(getAngleTo(plan))), (float)y-(float)(100*Math.cos(getAngleTo(plan))));
-				}
-				else{
-					p.line((float)x, (float)y, (float)x+(float)(100*Math.sin(getAngleTo(plan))), (float)y+(float)(100*Math.cos(getAngleTo(plan))));
-				}
+
+			if (game.isDebug()){
+				p.ellipse((float)(x+1000*xAccel), (float)(y+1000*yAccel), 5, 5);
+				p.line((float)x, (float)y, (float)(x+10000*xAccel), (float)(y+10000*yAccel));
 				p.strokeWeight(1);
+				for (Planet plan: planets){
+					p.stroke (0, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
+					p.line((float)x, (float)y, (float)plan.getX(), (float)plan.getY());
+					p.stroke(100, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
+					p.strokeWeight(3);
+					if (Math.abs(Math.signum(Math.cos(getAngleTo(plan)))-Math.signum(Math.sin(getAngleTo(plan))))<0.1){
+						p.line((float)x, (float)y, (float)x-(float)(100*Math.sin(getAngleTo(plan))), (float)y-(float)(100*Math.cos(getAngleTo(plan))));
+					}
+					else{
+						p.line((float)x, (float)y, (float)x+(float)(100*Math.sin(getAngleTo(plan))), (float)y+(float)(100*Math.cos(getAngleTo(plan))));
+					}
+					p.strokeWeight(1);
+				}
 			}
+			p.stroke(0);
 		}
-		p.stroke(0);
 	}
 
 }
