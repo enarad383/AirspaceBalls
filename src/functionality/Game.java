@@ -2,7 +2,10 @@ package functionality;
 
 import java.util.ArrayList;
 
+import Menu.GameHUD;
+import Menu.MenuButtons;
 import gameplayObjects.*;
+
 import processing.core.PApplet;
 
 public class Game extends PApplet{
@@ -17,6 +20,8 @@ public class Game extends PApplet{
 	private boolean isDebug;
 
 	private int gamePage;
+	
+	private MenuButtons but1;
 
 	
 	public Game(){
@@ -65,19 +70,11 @@ public class Game extends PApplet{
 		if (gamePage == 0){
 			menuScreen();
 		} else if (gamePage == 1){
+			
 			gameScreen();
 		}
 		
 		
-		if (keyPressed){
-			if (key == '5'){
-				gamePage = 1;
-			} else if (key == '6'){
-				gamePage = 0;
-			}
-		}
-		
-
 	}
 	
 	public Sun getSun(){
@@ -87,12 +84,11 @@ public class Game extends PApplet{
 	
 	public void menuScreen(){
 		background(0);
-		textAlign(CENTER);
-		text("Press 5 to start", height/2, width/2);
+		but1 = new MenuButtons (height/18, width/30, "GO!", this); //will auto draw.
 	}
 	
 	public void gameScreen(){
-		background(0);
+		
 		if (!isPaused){
 			background(0);
 			translate(getCentX(),getCentY());
@@ -111,7 +107,8 @@ public class Game extends PApplet{
 		}
 		if (keyPressed){
 			if (key == 'p'){
-				isPaused = true;
+				isPaused = !isPaused;
+				
 			}
 			if (key == 'u'){
 				isPaused = false;
@@ -145,7 +142,14 @@ public class Game extends PApplet{
 	}
 	
 	
-	
+	public void mousePressed(){
+		
+		if (mouseButton == LEFT || but1.onRect()){
+			gamePage = 1;
+		}
+		
+		
+	}
 	
 	
 	
