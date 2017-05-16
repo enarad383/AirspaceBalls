@@ -6,7 +6,7 @@ import processing.core.PApplet;
 public class Planet extends GameObject {
 
 	private double gravAccel;
-	private double size;
+	protected double size;
 	private double orbitHeight;
 	private double orbitVelAngular;
 	private double angle;

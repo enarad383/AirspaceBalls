@@ -7,8 +7,7 @@ import processing.core.PApplet;
 
 public class Projectile extends GameObject{
 	
-	private double accel;
-	private double accelAngle;
+	private double xAccel, yAccel;
 	private double gravMult = 23.5;
 	private ArrayList<Planet>planets;
 
@@ -24,8 +23,8 @@ public class Projectile extends GameObject{
 		super(x, y, g);
 		velX = xVel;
 		velY = yVel;
-		accel = 0;
-		accelAngle = 0;
+		xAccel = 0;
+		yAccel = 0;
 		planets = new ArrayList<Planet>();
 
 	}
@@ -41,29 +40,32 @@ public class Projectile extends GameObject{
 
 		double tempaccel = 1*gravMult*(Physics.GRAVCONST*sun.getMass()/Math.pow(distanceTo(sun), 2));
 		double tempAngle = getAngleTo(sun);
-		accelX += tempaccel*Math.cos(tempAngle);
-		accelY += tempaccel*Math.sin(tempAngle);
+		if (Math.abs(Math.signum(Math.cos(tempAngle))-Math.signum(Math.sin(tempAngle)))<0.1){ //if in QI or QIII
+			//if (Math.cos(getAngleTo(p))>0){
+				accelX += tempaccel*Math.cos(tempAngle);
+				accelY += tempaccel*Math.sin(tempAngle);
+			}
+			else{
+				accelX -= tempaccel*Math.cos(tempAngle);
+				accelY -= tempaccel*Math.sin(tempAngle);
+			}
 		for (Planet p: planets){ //PROBLEM: Can't seem to properly add forces at certain angles
 			tempaccel = 2*gravMult*(Physics.GRAVCONST*p.getMass()/Math.pow(distanceTo(p), 2));
 			tempAngle = getAngleTo(p);
-			double cosine = distToX(p)/distanceTo(p);
-			double sine = distToY(p)/distanceTo(p);
-//			accelX += tempaccel*Math.cos(tempAngle);
-//			accelY += tempaccel*Math.cos(tempAngle);
-			accelX += tempaccel*cosine;
-			accelY += tempaccel*sine;
+			if (Math.abs(Math.signum(Math.cos(getAngleTo(p)))-Math.signum(Math.sin(getAngleTo(p))))<0.1){ //if in QI or QIII
+			//if (Math.cos(getAngleTo(p))>0){
+				accelX += tempaccel*Math.cos(tempAngle);
+				accelY += tempaccel*Math.sin(tempAngle);
+			}
+			else{
+				accelX -= tempaccel*Math.cos(tempAngle);
+				accelY -= tempaccel*Math.sin(tempAngle);
+			}
 			
 
 		}
-		
-		accel = Math.sqrt(accelX*accelX + accelY*accelY);
-		accelAngle = Math.atan(accelX/accelY)+Math.PI;
-		if (accelX<0){
-			accelAngle += Math.PI;
-		}
-		else if (accelY<0){
-			accelAngle += 2*Math.PI;
-		}
+		xAccel = -accelY;
+		yAccel = -accelX;
 	}
 	
 	/** Tells the projectile to take one step, recalculating gravity and changing its velocity.
@@ -72,7 +74,8 @@ public class Projectile extends GameObject{
 	 */
 	public void orbit(ArrayList<Planet> planets){
 		gatherForce(planets);
-		changeVel(accel*Math.cos(accelAngle), accel*Math.sin(accelAngle));
+		//changeVel(accel*Math.cos(accelAngle), accel*Math.sin(accelAngle));
+		changeVel(xAccel, yAccel);
 		act();
 	}
 	
@@ -88,25 +91,25 @@ public class Projectile extends GameObject{
 		p.fill(0, 255, 0);
 		p.stroke(255,255,0);
 		p.strokeWeight(1);
-		p.ellipse((float)(x+1000*accel*Math.cos(accelAngle)), (float)(y+1000*accel*Math.sin(accelAngle)), 5, 5);
-		//p.line((float)x, (float)y, (float)(x+10000*accel*Math.cos(accelAngle)), (float)(y+10000*accel*Math.sin(accelAngle)));
-		//Planet plan = planets.get(2);
-		p.strokeWeight(1);
-		/*
-		for (Planet plan: planets){
-			p.stroke (0, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
-			p.line((float)x, (float)y, (float)plan.getX(), (float)plan.getY());
-			p.stroke(100, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
-			p.strokeWeight(3);
-			if (Math.abs(Math.signum(Math.cos(getAngleTo(plan)))-Math.signum(Math.sin(getAngleTo(plan))))<0.1){
-				p.line((float)x, (float)y, (float)x-(float)(100*Math.sin(getAngleTo(plan))), (float)y-(float)(100*Math.cos(getAngleTo(plan))));
-			}
-			else{
-				p.line((float)x, (float)y, (float)x+(float)(100*Math.sin(getAngleTo(plan))), (float)y+(float)(100*Math.cos(getAngleTo(plan))));
-			}
+		
+		if (game.isDebug()){
+			p.ellipse((float)(x+1000*xAccel), (float)(y+1000*yAccel), 5, 5);
+			p.line((float)x, (float)y, (float)(x+10000*xAccel), (float)(y+10000*yAccel));
 			p.strokeWeight(1);
+			for (Planet plan: planets){
+				p.stroke (0, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
+				p.line((float)x, (float)y, (float)plan.getX(), (float)plan.getY());
+				p.stroke(100, 50+10*(float)plan.getMass(), 100+5*(float)plan.getMass());
+				p.strokeWeight(3);
+				if (Math.abs(Math.signum(Math.cos(getAngleTo(plan)))-Math.signum(Math.sin(getAngleTo(plan))))<0.1){
+					p.line((float)x, (float)y, (float)x-(float)(100*Math.sin(getAngleTo(plan))), (float)y-(float)(100*Math.cos(getAngleTo(plan))));
+				}
+				else{
+					p.line((float)x, (float)y, (float)x+(float)(100*Math.sin(getAngleTo(plan))), (float)y+(float)(100*Math.cos(getAngleTo(plan))));
+				}
+				p.strokeWeight(1);
+			}
 		}
-		*/
 		p.stroke(0);
 	}
 
