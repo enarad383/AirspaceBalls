@@ -11,13 +11,15 @@ public class Game extends PApplet{
 	private Sun sun;
 	private ArrayList<Planet> planets;
 	private Projectile proj;
-	boolean isPaused;
+	private boolean isPaused;
+	private boolean isDebug;
 	
 	public Game(){
 		super();
 		runSketch();
 		planets = new ArrayList<Planet>();
 		isPaused = false;
+		isDebug = false;
 	}
 	
 	public int getCentX(){
@@ -31,12 +33,21 @@ public class Game extends PApplet{
 		
 		sun = new Sun(this, 190);
 		
-	//	planets.add(new Planet(100, 1, this, 2, 10));
+		planets.add(new Planet(125, 1, this, 2, 10));
 	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
-		planets.add(new Planet(300, 0, this, 15, 20));
+		planets.add(new Planet(400, 0, this, 15, 20));
 		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
-		proj = new Projectile(-300, 0.0, this, 0, 2.5);
+		proj = new Projectile(-300, 0.0, this, 0, -3.25);
 	}
+	
+	public void setDebug(){
+		isDebug = !isDebug;
+	}
+	
+	public boolean isDebug(){
+		return isDebug;
+	}
+	
 	public void draw(){
 		if (!isPaused){
 			background(0);
@@ -57,6 +68,21 @@ public class Game extends PApplet{
 			}
 			if (key == 'u'){
 				isPaused = false;
+			}
+			if (key == 'd'){
+				setDebug();
+			}
+			if (keyCode == UP){
+				
+			}
+			if (keyCode == DOWN){
+				
+			}
+			if (keyCode == LEFT){
+				
+			}
+			if (keyCode == RIGHT){
+				
 			}
 		}
 
