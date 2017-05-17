@@ -48,9 +48,9 @@ public class Cannon extends Planet{
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
 		p.stroke(254);
-		p.fill(150,150,254);
+		p.fill(50,50,254);
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
-		double l = 10;
+		double l = 20;
 		double w = 3;	
 		p.pushMatrix();
 		p.translate((float)x, (float)y);
