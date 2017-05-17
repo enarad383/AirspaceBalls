@@ -40,7 +40,7 @@ public class MenuButtons extends PApplet{
 			p.fill(255);
 			p.textSize(40);
 		} else {
-			p.fill(150);
+			p.fill(65, 160, 244);
 			p.textSize(38);
 		}
 		
@@ -54,7 +54,7 @@ public class MenuButtons extends PApplet{
 			p.fill(255);
 			p.textSize(40);
 		} else {
-			p.fill(150);
+			p.fill(65, 160, 244);
 			p.textSize(38);
 		}
 		

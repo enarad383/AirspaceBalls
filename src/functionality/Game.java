@@ -100,9 +100,31 @@ public class Game extends PApplet{
 		fill(170);
 		rectMode(CORNER);
 		rect((float)sketchWidth()/4-90, (float)sketchHeight()/4+2, 180, 2);
+		rect((float)(sketchWidth()*3)/4-115, (float)(sketchHeight())/4+2, 230, 2);
+		
 		textAlign(CENTER);
 		textSize(38);
 		text("Controls:", sketchWidth()/4, sketchHeight()/4);
+		text("Description:", (sketchWidth()*3)/4, (sketchHeight())/4);
+		textAlign(LEFT);
+		fill(255);
+		textSize(16);
+		
+		
+		text("The game of golf is difficult, as a ball must be precisely aimed to hit a target very far away. "
+				+ "However, regular old earth golf only has one source of gravity to worry about. "
+				+ "In Airspace Balls, the game of golf is scaled up to take place in an entire solar system. "
+				+ "Rather than taking aim and judging distance, the player must predict how a ball will travel "
+				+ "as it’s flung into the gravity fields of several planets. This is a game targeted towards the light "
+				+ "simulation enthusiast. Airspace Balls provides a fun way to explore the basics of orbital mechanics while also allowing "
+				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
+		
+		
+		
+		
+		
+		
+		
 		textSize(10);
 	}
 	
