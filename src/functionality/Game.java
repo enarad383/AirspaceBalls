@@ -1,6 +1,7 @@
 package functionality;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Menu.GameHUD;
 import Menu.MenuButtons;
@@ -13,7 +14,7 @@ public class Game extends PApplet{
 
 	private Sun sun;
 	private ArrayList<Planet> planets;
-	private Projectile proj;
+	private ArrayList<Projectile> projectiles;
 	private Cannon can;
 
 	private boolean isPaused;
@@ -28,6 +29,7 @@ public class Game extends PApplet{
 		super();
 		runSketch();
 		planets = new ArrayList<Planet>();
+		projectiles = new ArrayList<Projectile>();
 		isPaused = false;
 
 		isDebug = false;
@@ -53,8 +55,6 @@ public class Game extends PApplet{
 	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
 		planets.add(new Planet(400, 0, this, 15, 20));
 		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
-		proj = new Projectile(-300, 0.0, this, 0, -3.25);
-		proj.setVisible(false);
 	}
 	
 	public void setDebug(){
@@ -113,9 +113,16 @@ public class Game extends PApplet{
 			translate(getCentX(),getCentY());
 			sun.draw(this);
 			ellipse(0, 0, 30, 30);
-			proj.orbit(planets);
-			proj.draw(this);
-			
+			for (Projectile proj: projectiles){
+				proj.orbit(planets);
+				proj.draw(this);
+			}
+			Iterator<Projectile> projit= projectiles.iterator();
+			while (projit.hasNext()){
+				if (!projit.next().isLive()){
+					projit.remove();
+				}
+			}
 			for (Planet p: planets){
 				p.draw(this);
 				p.orbit();
@@ -123,10 +130,10 @@ public class Game extends PApplet{
 			can.orbit();
 			can.draw(this);
 			if (isDebug){
-				fill(255);
 				textAlign(LEFT);
-				text ("Can vX = " + can.getVelX(), -400, -400);
-				text ("Can vY = " + can.getVelY(), -400, -380);
+				fill(0, 255, 0);
+				text("FPS: " + frameRate, -450, -450);
+				
 			}
 			
 		}
@@ -165,10 +172,9 @@ public class Game extends PApplet{
 	}
 	
 	public void fireProjectile(){
-		proj.setVisible(true);
-		proj = new Projectile(can.getX(), can.getY(), this, 
+		projectiles.add(new Projectile(can.getX(), can.getY(), this, 
 				can.getVelX()+can.getPower()*Math.cos(can.getAimAngle()),
-				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle()));
+				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle())));
 	}
 	
 	

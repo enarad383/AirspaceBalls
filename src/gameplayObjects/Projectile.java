@@ -10,6 +10,7 @@ public class Projectile extends GameObject{
 	private double xAccel, yAccel;
 	private double gravMult = 11.75*1.5;
 	private ArrayList<Planet>planets;
+	boolean isLive;
 
 	/**Constructs a Projectile object.
 	 * 
@@ -26,6 +27,7 @@ public class Projectile extends GameObject{
 		xAccel = 0;
 		yAccel = 0;
 		planets = new ArrayList<Planet>();
+		isLive = true;
 
 	}
 	
@@ -40,6 +42,10 @@ public class Projectile extends GameObject{
 
 		double tempaccel = 1*gravMult*(Physics.GRAVCONST*sun.getMass()/Math.pow(distanceTo(sun), 2));
 		double tempAngle = getAngleTo(sun);
+		if (distanceTo(sun)>2000 || distanceTo(sun)<30){
+			isLive = false;
+			return;
+		}
 		if (Math.abs(Math.signum(Math.cos(tempAngle))-Math.signum(Math.sin(tempAngle)))<0.1){ //if in QI or QIII
 			//if (Math.cos(getAngleTo(p))>0){
 				accelX += tempaccel*Math.cos(tempAngle);
@@ -50,6 +56,10 @@ public class Projectile extends GameObject{
 				accelY -= tempaccel*Math.sin(tempAngle);
 			}
 		for (Planet p: planets){ 
+			if (distanceTo(p)<p.getRadius()){
+				isLive = false;
+				return;
+			}
 			tempaccel = 3*gravMult*(Physics.GRAVCONST*p.getMass()/Math.pow(distanceTo(p), 2));
 			tempAngle = getAngleTo(p);
 			if (Math.abs(Math.signum(Math.cos(getAngleTo(p)))-Math.signum(Math.sin(getAngleTo(p))))<0.1){ //if in QI or QIII
@@ -77,6 +87,10 @@ public class Projectile extends GameObject{
 		//changeVel(accel*Math.cos(accelAngle), accel*Math.sin(accelAngle));
 		changeVel(xAccel, yAccel);
 		act();
+	}
+	
+	public boolean isLive(){
+		return isLive;
 	}
 	
 	@SuppressWarnings("static-access")
