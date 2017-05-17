@@ -95,7 +95,7 @@ public class Game extends PApplet{
 		textSize(10);
 	}
 	
-	public void instrScreen(){
+	public void instrScreen(){	//NOT DONE
 		background(0);
 		fill(170);
 		rectMode(CORNER);
