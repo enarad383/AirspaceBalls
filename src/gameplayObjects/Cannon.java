@@ -55,7 +55,7 @@ public class Cannon extends Planet{
 		p.pushMatrix();
 		p.translate((float)x, (float)y);
 		p.rotate((float)aimAngle);
-		p.rect(0, -(float)w/2, (float)l, (float)w);
+		p.rect((float)l/2, -(float)w/2, (float)l, (float)w);
 		p.popMatrix();
 		p.stroke(0);
 		
