@@ -21,7 +21,7 @@ public class Game extends PApplet{
 
 	private int gamePage;
 	
-	private MenuButtons but1;
+	private MenuButtons menu;
 
 	
 	public Game(){
@@ -72,6 +72,12 @@ public class Game extends PApplet{
 		} else if (gamePage == 1){
 			
 			gameScreen();
+		} else if (gamePage == 2){
+			instrScreen();
+		}
+		
+		if (keyPressed && key == BACKSPACE){
+			gamePage = 0;
 		}
 		
 		
@@ -84,7 +90,20 @@ public class Game extends PApplet{
 	
 	public void menuScreen(){
 		background(0);
-		but1 = new MenuButtons (height/18, width/30, "GO!", this); //will auto draw.
+		menu = new MenuButtons (this);
+		menu.draw(this);
+		textSize(10);
+	}
+	
+	public void instrScreen(){
+		background(0);
+		fill(170);
+		rectMode(CORNER);
+		rect((float)sketchWidth()/4-90, (float)sketchHeight()/4+2, 180, 2);
+		textAlign(CENTER);
+		textSize(38);
+		text("Controls:", sketchWidth()/4, sketchHeight()/4);
+		textSize(10);
 	}
 	
 	public void gameScreen(){
@@ -116,6 +135,8 @@ public class Game extends PApplet{
 				isPaused = !isPaused;
 				
 			}
+			
+			
 			if (key == 'u'){
 				isPaused = false;
 			}
@@ -137,6 +158,9 @@ public class Game extends PApplet{
 			if (key == ' '){
 				fireProjectile();
 			}
+			
+			
+			
 		}
 	}
 	
@@ -150,8 +174,15 @@ public class Game extends PApplet{
 	
 	public void mousePressed(){
 		
-		if (mouseButton == LEFT || but1.onRect()){
-			gamePage = 1;
+		if (mousePressed && mouseButton==LEFT && menu.onButton(mouseX, mouseY)){
+			if (menu.getButtonPressed() == 0){
+				gamePage = 1;
+			} else if (menu.getButtonPressed() == 1){
+				gamePage = 2;
+			}
+			
+			
+			
 		}
 		
 		
