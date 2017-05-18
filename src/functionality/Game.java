@@ -98,6 +98,8 @@ public class Game extends PApplet{
 	
 	public void instrScreen(){	//NOT DONE
 		background(0);
+		
+		
 		fill(170);
 		rectMode(CORNER);
 		rect((float)sketchWidth()/4-90, (float)sketchHeight()/4+2, 180, 2);

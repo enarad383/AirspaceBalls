@@ -1,9 +1,11 @@
 package gameplayObjects;
 
+import java.io.Serializable;
+
 import functionality.Game;
 import processing.core.PApplet;
 
-public class Sun extends GameObject{
+public class Sun extends GameObject implements Serializable{
 	
 	private double mass;
 
