@@ -9,10 +9,38 @@ import processing.core.PApplet;
  *
  */
 public class Goal extends Planet{
+	
+	private boolean isHit;
 
+	/**Creates a goal.
+	 * 
+	 * @param radius 
+	 * @param angle
+	 * @param g
+	 * @param grav
+	 * @param size
+	 */
 	public Goal(double radius, double angle, Game g, double grav, double size) {
 		super(radius, angle, g, grav, size);
 		// TODO Auto-generated constructor stub
+		isHit = false;
+	}
+	
+	public void orbit(){
+		super.orbit();
+		for (Projectile proj: super.game.getProjectiles()){
+			if (distanceTo(proj)<this.size+15){
+				isHit = true;
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @return Whether or not the target has been hit.
+	 */
+	public boolean isHit(){
+		return isHit();
 	}
 	
 	public void draw(PApplet p){

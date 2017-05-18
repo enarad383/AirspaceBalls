@@ -96,6 +96,13 @@ public class Game extends PApplet{
 		return sun;
 	}
 	
+	/**
+	 * 
+	 * @return The list containing all projectiles in the game.
+	 */
+	public ArrayList<Projectile> getProjectiles(){
+		return projectiles;
+	}
 	
 	public void menuScreen(){
 		background(0);

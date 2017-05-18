@@ -48,10 +48,10 @@ public class Cannon extends Planet implements Serializable{
 	 * @param direction Whether to increase or decrease the power.
 	 */
 	public void changePower(boolean direction){
-		if (direction){
+		if (direction && power<4){
 			power += 0.1;
 		}
-		else{
+		else if (power>0){
 			power -= 0.1;
 		}
 	}
