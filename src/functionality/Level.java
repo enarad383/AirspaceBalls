@@ -14,15 +14,29 @@ public class Level implements Serializable{
 	private ArrayList<Planet> planets;
 	//private Cannon cann;
 	
+	
+	/**
+	 * Represents Level or a specific configuration of planets.
+	 * @param num The level number.
+	 */
 	public Level (int num){
 		planets = new ArrayList<Planet>();
 		levelNum = num;
 		
 	}
 	
+	/**
+	 * Add a planet to the level. Use this when making a level. 
+	 * @param radius The distance at which the planet orbits the sun.
+	 * @param angle The polar angle at which the planet starts.
+	 * @param g The Game object in which it is created.
+	 * @param grav The acceleration due to the gravity of the planet.
+	 * @param size The visual size of the planet.
+	 */
 	public void addPlanet(double radius, double angle, Game g, double grav, double size){
 		planets.add(new Planet(radius, angle, g, grav, size));
 	}
+	
 	
 	public void addSun(Game g){
 		//sun = new Sun(g, 190);

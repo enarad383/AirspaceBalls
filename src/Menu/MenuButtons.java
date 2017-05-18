@@ -17,7 +17,11 @@ public class MenuButtons extends PApplet{
 	
 	private boolean overPlay, overInstr;
 	
-	
+	/**Creates all of the menu buttons.
+	 * 
+	 * @param g A Game object.
+	 * 
+	 */
 	public MenuButtons(Game g) {
 		start = "PLAY";
 		instructions = "INSTRUCTIONS";
@@ -31,7 +35,10 @@ public class MenuButtons extends PApplet{
 	}
 	
 	
-	
+	/**
+	 * Draws the buttons (PLAY & INSTRUCTIONS).
+	 * @param p A PApplet Object.
+	 */
 	public void draw(PApplet p){
 		
 		onButton(p.pmouseX, p.pmouseY);
@@ -67,6 +74,13 @@ public class MenuButtons extends PApplet{
 
 	}
 	
+	
+	/**
+	 * Detects whether the mouse is on a button or not.
+	 * @param mouseX The x position of the mouse in the window.
+	 * @param mouseY The y position of the mouse in the window.
+	 * @return true if the mouse is over a button. 
+	 */
 	public boolean onButton(int mouseX, int mouseY)  {
 		  if ((mouseX >= x1-50 && mouseX <= x1+50 && mouseY >= y1-36 && mouseY <= y1)) {
 			  overPlay = true;
@@ -84,6 +98,11 @@ public class MenuButtons extends PApplet{
 		  
 	}
 	
+	
+	/**
+	 * Determines which button was clicked on.
+	 * @return 0 if the PLAY buttons was clicked. 1 if the INSTRUCTIONS button was clicked.
+	 */
 	public int getButtonPressed(){
 		if (overInstr){
 			return 1;

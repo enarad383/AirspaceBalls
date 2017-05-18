@@ -13,12 +13,18 @@ import java.util.*;
 
 public class GameHUD extends Game 
 {
-	
+	/**
+	 * Represents the text and information given when playing the game.
+	 * @param g A Game object. 
+	 */
 	public GameHUD (Game g){
 		
 	}
 	
-	public void draw(){
+	/**
+	 * Draws the various text and information in the window. 
+	 */
+	public void draw(Game g){
 		
 	}
 
