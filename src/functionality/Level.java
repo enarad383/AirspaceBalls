@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import gameplayObjects.Cannon;
 import gameplayObjects.Planet;
 import gameplayObjects.Sun;
+import processing.core.PApplet;
 
-public class Level implements Serializable{
+public class Level extends PApplet implements Serializable{
 	
 	private static int levelNum;
-	//private Sun sun;
+	private Sun sun;
 	private ArrayList<Planet> planets;
-	//private Cannon cann;
+	private Cannon cann;
 	
 	
 	/**
@@ -24,6 +25,12 @@ public class Level implements Serializable{
 		levelNum = num;
 		
 	}
+	
+	public void initialize (int num){
+		levelNum = num;
+		planets = new ArrayList<Planet>();
+	}
+	
 	
 	/**
 	 * Add a planet to the level. Use this when making a level. 
@@ -42,7 +49,7 @@ public class Level implements Serializable{
 	 * @param g Game object.
 	 */
 	public void addSun(Game g){
-		//sun = new Sun(g, 190);
+		sun = new Sun(g, 190);
 	}
 	
 	/**
@@ -50,8 +57,16 @@ public class Level implements Serializable{
 	 * @param g Game object.
 	 */
 	public void addCannon(Game g){
-		//cann = new Cannon(200, 50, g, 1);
+		cann = new Cannon(200, 50, g, 1);
 	}
+	
+	public ArrayList<Planet> getPlanets(){
+		return planets;
+		
+	}
+	
+	
+	
 	
 	/**
 	 * Load a new Level.
@@ -59,7 +74,7 @@ public class Level implements Serializable{
 	 */
 	public static Level loadState(){
 		  FileIO reader = new FileIO();
-		  return (Level)reader.readObject("saveFile" + levelNum + ".ssf");
+		  return (Level)reader.readObject("lvl" + levelNum + ".balls");
 	  }
 	
 	/**
@@ -67,7 +82,7 @@ public class Level implements Serializable{
 	 */
 	public void saveState(){
 		  FileIO writer = new FileIO();
-		  writer.writeObject("saveFile" + levelNum + ".ssf", this);
+		  writer.writeObject("lvl" + levelNum + ".balls", this);
 	  }
 	
 	

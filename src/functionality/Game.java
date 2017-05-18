@@ -24,6 +24,7 @@ public class Game extends PApplet{
 	private boolean isDebug;
 
 	private int gamePage;
+	private int lvlNum;
 	
 	private MenuButtons menu;
 
@@ -43,7 +44,7 @@ public class Game extends PApplet{
 		gamePage = 0;
 		shootTimer = 0;
 		
-		
+		lvlNum = 1;
 
 	}
 	/**
@@ -102,7 +103,7 @@ public class Game extends PApplet{
 		if (gamePage == 0){
 			menuScreen();
 		} else if (gamePage == 1){
-			
+			//levelTest();
 			gameScreen();
 		} else if (gamePage == 2){
 			instrScreen();
@@ -263,6 +264,16 @@ public class Game extends PApplet{
 			
 		}
 	}
+	
+	public void levelTest(){
+		
+		//Level lvl = Level.loadState();
+		//lvl.initialize(lvlNum);
+		
+		
+	}
+	
+	
 	
 	/**
 	 * Fires a projectile from the cannon.
