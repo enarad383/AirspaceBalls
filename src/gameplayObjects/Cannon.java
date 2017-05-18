@@ -48,6 +48,7 @@ public class Cannon extends Planet{
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
 		p.stroke(254);
+		p.strokeWeight(1);
 		p.fill(50,50,254);
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
 		double l = 20;

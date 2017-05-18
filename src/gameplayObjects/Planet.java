@@ -82,7 +82,9 @@ public class Planet extends GameObject {
 	 */
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
-		p.fill(200,100,50);
+		p.strokeWeight(1);
+		p.stroke(0);
+		p.fill(200,150,100);
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
 	}
 

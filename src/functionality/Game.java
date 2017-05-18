@@ -15,9 +15,11 @@ public class Game extends PApplet{
 	private Sun sun;
 	private ArrayList<Planet> planets;
 	private ArrayList<Projectile> projectiles;
+	private ArrayList<Spark> sparks;
 	private Cannon can;
 	
-	private boolean isArmed;
+	private int shootTimer;
+	
 	private boolean isPaused;
 	private boolean isDebug;
 
@@ -31,11 +33,13 @@ public class Game extends PApplet{
 		runSketch();
 		planets = new ArrayList<Planet>();
 		projectiles = new ArrayList<Projectile>();
+		sparks = new ArrayList<Spark>();
 		isPaused = false;
 
 		isDebug = false;
-		isArmed = false;
+
 		gamePage = 0;
+		shootTimer = 0;
 		
 		
 
@@ -56,6 +60,10 @@ public class Game extends PApplet{
 	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
 		planets.add(new Planet(400, 0, this, 15, 20));
 		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
+		planets.add(new Goal(200,Math.PI/2, this, 10, 10));
+		for (int i = 0; i<10; i++){
+			sparks.add(new Spark(0, 0, this, 0, 0, 0));
+		}
 	}
 	
 	public void setDebug(){
@@ -135,6 +143,8 @@ public class Game extends PApplet{
 			background(0);
 			translate(getCentX(),getCentY());
 			sun.draw(this);
+			strokeWeight(1);
+			stroke(255);
 			ellipse(0, 0, 30, 30);
 			for (Projectile proj: projectiles){
 				proj.orbit(planets);
@@ -142,13 +152,25 @@ public class Game extends PApplet{
 			}
 			Iterator<Projectile> projit= projectiles.iterator();
 			while (projit.hasNext()){
-				if (!projit.next().isLive()){
+				Projectile pro = projit.next();
+				if (!pro.isLive()){	
+					
+					for (Spark sp: sparks){	
+						sp.setTime(20);
+						sp.setPos(pro.getX(), pro.getY());
+						sp.setVel(pro.getVelX()/1.5+10*(Math.random()-0.5), pro.getVelY()/1.5+10*(Math.random()-0.5));
+						sp.setVisible(true);
+					}
 					projit.remove();
 				}
 			}
 			for (Planet p: planets){
 				p.draw(this);
 				p.orbit();
+			}
+			for (Spark sp: sparks){
+				sp.act();
+				sp.draw(this);
 			}
 			can.orbit();
 			can.draw(this);
@@ -157,6 +179,9 @@ public class Game extends PApplet{
 				fill(0, 255, 0);
 				text("FPS: " + frameRate, -450, -450);
 				
+			}
+			if (shootTimer>0){
+				shootTimer--;
 			}
 			
 		}
@@ -185,7 +210,7 @@ public class Game extends PApplet{
 			if (keyCode == RIGHT){
 				can.aim(true);
 			}
-			if (key == ' '){
+			if (key == ' ' && shootTimer == 0){
 				fireProjectile();
 			}
 			
@@ -198,6 +223,7 @@ public class Game extends PApplet{
 		projectiles.add(new Projectile(can.getX(), can.getY(), this, 
 				can.getVelX()+can.getPower()*Math.cos(can.getAimAngle()),
 				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle())));
+		shootTimer = 20;
 	}
 	
 	
