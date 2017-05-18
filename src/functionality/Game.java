@@ -16,7 +16,8 @@ public class Game extends PApplet{
 	private ArrayList<Planet> planets;
 	private ArrayList<Projectile> projectiles;
 	private Cannon can;
-
+	
+	private boolean isArmed;
 	private boolean isPaused;
 	private boolean isDebug;
 
@@ -33,7 +34,7 @@ public class Game extends PApplet{
 		isPaused = false;
 
 		isDebug = false;
-
+		isArmed = false;
 		gamePage = 0;
 		
 		
