@@ -27,7 +27,9 @@ public class Game extends PApplet{
 	
 	private MenuButtons menu;
 
-	
+	/**
+	 * Represents the Game.
+	 */
 	public Game(){
 		super();
 		runSketch();
@@ -44,14 +46,25 @@ public class Game extends PApplet{
 		
 
 	}
-	
+	/**
+	 * Determines the center x value of the window. 
+	 * @return x value of the center of the window. 
+	 */
 	public int getCentX(){
 		return width/2;
 	}
+	
+	/**
+	 * Determines the center y value of the window. 
+	 * @return y value of the center of the window. 
+	 */
 	public int getCentY(){
 		return height/2;
 	}
 	
+	/**
+	 * Sets the window. 
+	 */
 	public void setup(){
 		
 		sun = new Sun(this, 190);
@@ -66,14 +79,24 @@ public class Game extends PApplet{
 		}
 	}
 	
+	/**
+	 * Modify the Debug value. 
+	 */
 	public void setDebug(){
 		isDebug = !isDebug;
 	}
 	
+	/**
+	 * Determines if the game is in debug mode.
+	 * @return true if the game is in debug mode. 
+	 */
 	public boolean isDebug(){
 		return isDebug;
 	}
 	
+	/**
+	 * Represents what is drawn in the window. Which screen is being displayed. 
+	 */
 	public void draw(){
 		
 		if (gamePage == 0){
@@ -92,11 +115,17 @@ public class Game extends PApplet{
 		
 	}
 	
+	/**
+	 * 
+	 * @return The sun object.
+	 */
 	public Sun getSun(){
 		return sun;
 	}
 	
-	
+	/**
+	 * Represents the menu screen. This is the screen displayed when first opening the game. 
+	 */
 	public void menuScreen(){
 		background(0);
 		menu = new MenuButtons (this);
@@ -104,6 +133,9 @@ public class Game extends PApplet{
 		textSize(10);
 	}
 	
+	/**
+	 * Represents the instructions screen. This is the screen displayed after the INSTRUCTIONS button is selected.
+	 */
 	public void instrScreen(){	//NOT DONE
 		background(0);
 		
@@ -139,6 +171,9 @@ public class Game extends PApplet{
 		textSize(10);
 	}
 	
+	/**
+	 * Represents the game screen. This screen is displayed when the PLAY button is selected. This is also where level files are read. 
+	 */
 	public void gameScreen(){
 		
 		if (!isPaused){
@@ -221,6 +256,9 @@ public class Game extends PApplet{
 		}
 	}
 	
+	/**
+	 * Fires a projectile from the cannon.
+	 */
 	public void fireProjectile(){
 		projectiles.add(new Projectile(can.getX(), can.getY(), this, 
 				can.getVelX()+can.getPower()*Math.cos(can.getAimAngle()),
@@ -228,7 +266,9 @@ public class Game extends PApplet{
 		shootTimer = 20;
 	}
 	
-	
+	/**
+	 * Checks if a button was pressed.
+	 */
 	public void mousePressed(){
 		
 		if (mousePressed && mouseButton==LEFT && menu.onButton(mouseX, mouseY)){
