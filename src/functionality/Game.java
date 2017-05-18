@@ -106,6 +106,8 @@ public class Game extends PApplet{
 	
 	public void instrScreen(){	//NOT DONE
 		background(0);
+		
+		
 		fill(170);
 		rectMode(CORNER);
 		rect((float)sketchWidth()/4-90, (float)sketchHeight()/4+2, 180, 2);
@@ -129,7 +131,7 @@ public class Game extends PApplet{
 				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
-		
+		text("'->' = Turn clockwise \n'<-' = Turn counterclockwise \n'SPACE' = Shoot \n", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
 		

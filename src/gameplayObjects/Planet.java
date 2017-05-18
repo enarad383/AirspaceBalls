@@ -1,9 +1,11 @@
 package gameplayObjects;
 
+import java.io.Serializable;
+
 import functionality.*;
 import processing.core.PApplet;
 
-public class Planet extends GameObject {
+public class Planet extends GameObject implements Serializable{
 
 	private double gravAccel;
 	protected double size;

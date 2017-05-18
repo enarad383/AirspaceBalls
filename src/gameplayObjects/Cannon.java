@@ -1,14 +1,18 @@
 package gameplayObjects;
 
+import java.io.Serializable;
+
 import functionality.Game;
 import processing.core.PApplet;
+
 
 /**Represents a cannon that can shoot projectiles.
  * 
  * @author enarad383
  *
  */
-public class Cannon extends Planet{
+public class Cannon extends Planet implements Serializable{
+
 
 	private double aimAngle;
 	private double power;

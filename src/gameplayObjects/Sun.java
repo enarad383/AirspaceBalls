@@ -1,14 +1,18 @@
 package gameplayObjects;
 
+import java.io.Serializable;
+
 import functionality.Game;
 import processing.core.PApplet;
+
 
 /**Represents a sun object that is the center of the solar system.
  * 
  * @author enarad383
  *
  */
-public class Sun extends GameObject{
+public class Sun extends GameObject implements Serializable{
+
 	
 	private double mass;
 
