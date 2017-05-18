@@ -48,7 +48,7 @@ public class Cannon extends Planet implements Serializable{
 	 * @param direction Whether to increase or decrease the power.
 	 */
 	public void changePower(boolean direction){
-		if (direction && power<4){
+		if (direction && power<6){
 			power += 0.1;
 		}
 		else if (power>0){
@@ -86,7 +86,7 @@ public class Cannon extends Planet implements Serializable{
 		p.strokeWeight(1);
 		p.fill(50,50,254);
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
-		double l = 20;
+		double l = 5*power;
 		double w = 3;	
 		p.pushMatrix();
 		p.translate((float)x, (float)y);
