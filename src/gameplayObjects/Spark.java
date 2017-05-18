@@ -3,6 +3,11 @@ package gameplayObjects;
 import functionality.Game;
 import processing.core.PApplet;
 
+/**Represents sparks that form in the event of a collision.
+ * 
+ * @author enarad383
+ *
+ */
 public class Spark extends GameObject {
 	private int timer;
 
@@ -14,6 +19,9 @@ public class Spark extends GameObject {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Increments the spark's timer and moves it according to velocity.
+	 */
 	public void act(){
 		if (timer>0){
 			timer--;
@@ -24,6 +32,10 @@ public class Spark extends GameObject {
 		}
 	}
 	
+	/**Sets the lifetime of the spark.
+	 * 
+	 * @param time how long it will last.
+	 */
 	public void setTime(int time){
 		timer = time;
 	}

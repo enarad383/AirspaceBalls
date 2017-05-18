@@ -3,6 +3,11 @@ package gameplayObjects;
 import functionality.Game;
 import processing.core.PApplet;
 
+/**Represents the target planet.
+ * 
+ * @author enarad383
+ *
+ */
 public class Goal extends Planet{
 
 	public Goal(double radius, double angle, Game g, double grav, double size) {

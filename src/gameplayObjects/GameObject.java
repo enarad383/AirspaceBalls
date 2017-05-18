@@ -3,6 +3,11 @@ package gameplayObjects;
 import functionality.*;
 import processing.core.PApplet;
 
+/**Represents any object in the game.
+ * 
+ * @author enarad383
+ *
+ */
 public class GameObject {
 	protected double x, y;
 	protected double velX, velY;
@@ -113,26 +118,50 @@ public class GameObject {
 		return other.x-x;
 	}
 	
+	/**
+	 * 
+	 * @return The object's x position.
+	 */
 	public double getX(){
 		return x;
 	}
 	
+	/**
+	 * 
+	 * @return The object's y position.
+	 */
 	public double getY(){
 		return y;
 	}
 	
+	/**
+	 * 
+	 * @return The object's x velocity.
+	 */
 	public double getVelX(){
 		return velX;
 	}
 	
+	/**
+	 * 
+	 * @return The object's y velocity.
+	 */
 	public double getVelY(){
 		return velY;
 	}
 	
+	/**
+	 * 
+	 * @return Whether or not the object is visible.
+	 */
 	public boolean isVisible(){
 		return isVisible;
 	}
 	
+	/**Sets whether or not the object is visible.
+	 * 
+	 * @param is The desired visibiltiy.
+	 */
 	public void setVisible(boolean is){
 		isVisible = is;
 	}

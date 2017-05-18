@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import functionality.*;
 import processing.core.PApplet;
 
+/**Represents a projectile that can be flung at planets.
+ * 
+ * @author enarad383
+ *
+ */
 public class Projectile extends GameObject{
 	
 	private double xAccel, yAccel;
@@ -89,6 +94,10 @@ public class Projectile extends GameObject{
 		act();
 	}
 	
+	/**
+	 * 
+	 * @return Whether or not the projectile is still alive.
+	 */
 	public boolean isLive(){
 		return isLive;
 	}

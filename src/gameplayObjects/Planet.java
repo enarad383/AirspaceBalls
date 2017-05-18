@@ -45,34 +45,64 @@ public class Planet extends GameObject {
 		return gravAccel;
 	}
 	
+	/**
+	 * 
+	 * @return The planet's radius.
+	 */
 	public double getRadius(){
 		return size;
 	}
 	
+	/**
+	 * 
+	 * @return The velocity of the planet.
+	 */
 	public double getVel(){
 		return orbitVelAngular*orbitHeight;
 	}
 	
+	/**
+	 * 
+	 * @return The orbital velocity of the planet.
+	 */
 	public double getOrbVel(){
 		return orbitVelAngular;
 	}
-	
+	/**
+	 * 
+	 * @return The height at which the planet orbits.
+	 */
 	public double getR(){
 		return orbitHeight;
 	}
 	
+	/**
+	 * @return X component of velocity
+	 */
 	public double getVelX(){
 		return getVel()*Math.cos(angle+Math.PI/2);
 	}
 	
+	/**
+	 * 
+	 * @return Y component of velocity
+	 */
 	public double getVelY(){
 		return getVel()*Math.sin(angle+Math.PI/2);
 	}
 	
+	/**Changes the angle by an amount
+	 * 
+	 * @param amt by which to change the angle
+	 */
 	public void incrementAngle(double amt){
 		angle += amt;
 	}
 	
+	/**Gets the angle of its orbit
+	 * 
+	 * @return angle of its orbit
+	 */
 	public double getAngle(){
 		return angle;
 	}
