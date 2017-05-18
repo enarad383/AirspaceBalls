@@ -37,22 +37,34 @@ public class Level implements Serializable{
 		planets.add(new Planet(radius, angle, g, grav, size));
 	}
 	
-	
+	/**
+	 * Add a Sun to the level. Only one sun per level.
+	 * @param g Game object.
+	 */
 	public void addSun(Game g){
 		//sun = new Sun(g, 190);
 	}
 	
+	/**
+	 * Add a cannon to the level. Only one cannon per level. 
+	 * @param g Game object.
+	 */
 	public void addCannon(Game g){
 		//cann = new Cannon(200, 50, g, 1);
 	}
 	
-	
+	/**
+	 * Load a new Level.
+	 * 
+	 */
 	public static Level loadState(){
 		  FileIO reader = new FileIO();
 		  return (Level)reader.readObject("saveFile" + levelNum + ".ssf");
 	  }
 	
-	
+	/**
+	 * Save a new Level. 
+	 */
 	public void saveState(){
 		  FileIO writer = new FileIO();
 		  writer.writeObject("saveFile" + levelNum + ".ssf", this);
