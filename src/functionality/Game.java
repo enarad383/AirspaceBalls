@@ -182,10 +182,17 @@ public class Game extends PApplet{
 	
 	public void winScreen(){
 		background(0);
+		textAlign(CENTER);
+		textSize(50);
+		for (int i = 10; i>0; i--){
+			fill (0, 25*i, 0);
+			text("LEVEL COMPLETE", 500+0.5f*i, 350+1*i);
+			text("LEVEL COMPLETE", 500-0.5f*i, 350-1*i);
+		}
 		textSize(48);
 		textAlign(CENTER);
 		fill(0,255,0);
-		text("Level complete! Press space to continue", 500, 500);
+		text("Press space to continue", 500, 500);
 		if (keyPressed){
 			if (key == ' '){
 				gamePage = 1;
