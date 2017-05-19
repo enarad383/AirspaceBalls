@@ -116,7 +116,7 @@ public class Planet extends GameObject implements Serializable{
 		p.ellipseMode(p.CENTER);
 		p.strokeWeight(1);
 		p.stroke(0);
-		p.fill(200,150,100);
+		p.fill(150,100,50);
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
 	}
 

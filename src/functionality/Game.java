@@ -19,12 +19,18 @@ public class Game extends PApplet{
 	private Cannon can;
 	
 	private int shootTimer;
+	private int winTimer;
 	
 	private boolean isPaused;
 	private boolean isDebug;
-
+	private boolean isWon;
+	
 	private int gamePage;
+
 	private int lvlNum;
+
+	
+
 	
 	private MenuButtons menu;
 
@@ -38,11 +44,14 @@ public class Game extends PApplet{
 		projectiles = new ArrayList<Projectile>();
 		sparks = new ArrayList<Spark>();
 		isPaused = false;
-
+		isWon = false;
 		isDebug = false;
+		
+
 
 		gamePage = 0;
 		shootTimer = 0;
+		winTimer = 0;
 		
 		lvlNum = 1;
 
@@ -74,7 +83,7 @@ public class Game extends PApplet{
 	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
 		planets.add(new Planet(400, 0, this, 15, 20));
 		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
-		planets.add(new Goal(200,Math.PI/2, this, 10, 10));
+		planets.add(new Goal(200,Math.PI/2, this, 10, 15));
 		for (int i = 0; i<10; i++){
 			sparks.add(new Spark(0, 0, this, 0, 0, 0));
 		}
@@ -85,6 +94,10 @@ public class Game extends PApplet{
 	 */
 	public void setDebug(){
 		isDebug = !isDebug;
+	}
+	
+	public void setGoaled(boolean goaled){
+		isWon = goaled;
 	}
 	
 	/**
@@ -107,7 +120,10 @@ public class Game extends PApplet{
 			gameScreen();
 		} else if (gamePage == 2){
 			instrScreen();
+		} else if (gamePage == 3){
+			winScreen();
 		}
+		
 		
 		if (keyPressed && key == BACKSPACE){
 			gamePage = 0;
@@ -142,6 +158,14 @@ public class Game extends PApplet{
 		textSize(10);
 	}
 	
+	public void winScreen(){
+		background(0);
+		textSize(48);
+		textAlign(CENTER);
+		fill(0,255,0);
+		text("Congratulations, you've won!", 500, 500);
+	}
+	
 	/**
 	 * Represents the instructions screen. This is the screen displayed after the INSTRUCTIONS button is selected.
 	 */
@@ -172,7 +196,7 @@ public class Game extends PApplet{
 				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
-		text("'->' = Turn clockwise \n'<-' = Turn counterclockwise \n'SPACE' = Shoot \n", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
+		text("LEFT & RIGHT ARROWS = Turn the cannon. \nSPACE = Fire the projectile.", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
 		
@@ -229,6 +253,13 @@ public class Game extends PApplet{
 			if (shootTimer>0){
 				shootTimer--;
 			}
+			if (isWon){
+				winTimer ++;
+			}
+			if (winTimer>60){
+				gamePage = 3;
+			}
+			
 			
 		}
 		if (keyPressed){
@@ -284,6 +315,7 @@ public class Game extends PApplet{
 				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle())));
 		shootTimer = 20;
 	}
+	
 	
 	/**
 	 * Checks if a button was pressed.

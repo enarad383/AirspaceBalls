@@ -26,11 +26,15 @@ public class Goal extends Planet{
 		isHit = false;
 	}
 	
+	/**Moves the goal and checks if it's been hit.
+	 * 
+	 */
 	public void orbit(){
 		super.orbit();
 		for (Projectile proj: super.game.getProjectiles()){
-			if (distanceTo(proj)<this.size+15){
+			if (distanceTo(proj)<this.size){
 				isHit = true;
+				game.setGoaled(true);
 			}
 		}
 	}
@@ -45,7 +49,10 @@ public class Goal extends Planet{
 	
 	public void draw(PApplet p){
 		p.ellipseMode(p.CENTER);
-		p.fill(100,255,100);
+		p.fill(50,255,50);
+		if (isHit){
+			p.fill(0);
+		}
 		p.ellipse((float)(x), (float)(y), (float)size, (float)size);
 	}
 
