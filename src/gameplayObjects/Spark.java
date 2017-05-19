@@ -11,8 +11,8 @@ import processing.core.PApplet;
 public class Spark extends GameObject {
 	private int timer;
 
-	public Spark(double x, double y, Game g, double vX, double vY, int time) {
-		super(x, y, g);
+	public Spark(double x, double y, double vX, double vY, int time) {
+		super(x, y);
 		super.setVel(vX, vY);
 		timer = time;
 		setVisible(true);

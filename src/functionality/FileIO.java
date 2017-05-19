@@ -83,7 +83,8 @@ public class FileIO {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} finally {
+		} 
+		finally {
 			if (obj != null)
 				try {
 					obj.close();

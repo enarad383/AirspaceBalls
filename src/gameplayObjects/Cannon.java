@@ -13,7 +13,7 @@ import processing.core.PApplet;
  */
 public class Cannon extends Planet implements Serializable{
 
-
+	private static final long serialVersionUID = 2;
 	private double aimAngle;
 	private double power;
 	
@@ -24,8 +24,8 @@ public class Cannon extends Planet implements Serializable{
 	 * @param g The game that the proojecile uses for calculations.
 	 * @param aimAngle The angle at which the canon is aiming.
 	 */
-	public Cannon(double radius, double angle, Game g, double aimAngle) {
-		super(radius, angle, g, 1, 10);
+	public Cannon(double radius, double angle, double aimAngle) {
+		super(radius, angle, 1, 10);
 		this.aimAngle = aimAngle;
 		power = 3;
 	}

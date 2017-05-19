@@ -26,7 +26,7 @@ public class Projectile extends GameObject{
 	 * @param yVel The initial y velocity.
 	 */
 	public Projectile(double x, double y, Game g, double xVel, double yVel) {
-		super(x, y, g);
+		super(x, y);
 		velX = xVel;
 		velY = yVel;
 		xAccel = 0;
@@ -43,7 +43,7 @@ public class Projectile extends GameObject{
 	public void gatherForce(ArrayList<Planet> planets){
 		this.planets = planets;
 		double accelX = 0, accelY = 0;
-		Sun sun = game.getSun();
+		Sun sun = new Sun(190);
 
 		double tempaccel = 1*gravMult*(Physics.GRAVCONST*sun.getMass()/Math.pow(distanceTo(sun), 2));
 		double tempAngle = getAngleTo(sun);
@@ -106,12 +106,12 @@ public class Projectile extends GameObject{
 	/**Draws the projectile using Processing.
 	 * 
 	 */
-	public void draw(PApplet p){
+	public void draw(PApplet p, Game game){
 		if (isVisible()){
 			p.ellipseMode(p.CENTER);
 			p.stroke(255,100,0);
 			p.fill(255,0,0);
-			p.ellipse((float)(x), (float)(y), 10, 10);
+			p.ellipse((float)(x), (float)(y), 5, 5);
 			p.fill(0, 255, 0);
 			p.stroke(255,255,0);
 			p.strokeWeight(1);

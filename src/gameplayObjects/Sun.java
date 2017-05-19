@@ -21,8 +21,8 @@ public class Sun extends GameObject implements Serializable{
 	 * @param g The game to calculate relations with.
 	 * @param mass The mass of the sun.
 	 */
-	public Sun(Game g, double mass) {
-		super(0, 0, g);
+	public Sun(double mass) {
+		super(0, 0);
 		this.mass = mass;
 		// TODO Auto-generated constructor stub
 	}
@@ -31,8 +31,8 @@ public class Sun extends GameObject implements Serializable{
 	 * 
 	 * @return The mass of the sun, used for gravity.
 	 */
-	public double getMass(){
-		return mass;
+	public static double getMass(){
+		return 190;
 	}
 	
 	public void draw(PApplet p){

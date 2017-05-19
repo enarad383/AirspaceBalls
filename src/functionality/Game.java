@@ -1,5 +1,6 @@
 package functionality;
 
+import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,7 +17,13 @@ public class Game extends PApplet{
 	private ArrayList<Planet> planets;
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Spark> sparks;
+	private ArrayList<Level> levels;
+	
+	private int currentLevel;
+	
 	private Cannon can;
+	
+	private FileIO reader;
 	
 	private int shootTimer;
 	private int winTimer;
@@ -42,12 +49,13 @@ public class Game extends PApplet{
 		isPaused = false;
 		isWon = false;
 		isDebug = false;
-		
-
+		reader = new FileIO();
+		levels = new ArrayList<Level>();
 
 		gamePage = 0;
 		shootTimer = 0;
 		winTimer = 0;
+		currentLevel = 0;
 		
 		
 
@@ -73,16 +81,20 @@ public class Game extends PApplet{
 	 */
 	public void setup(){
 		
-		sun = new Sun(this, 190);
-		can = new Cannon(200, 50, this, 1);
-		planets.add(new Planet(125, 1, this, 2, 10));
-	//	planets.add(new Planet(400, Math.PI/2, this, 15, 20));
-		planets.add(new Planet(400, 0, this, 15, 20));
-		planets.add(new Planet(250, -Math.PI*3/2, this, 10, 15));
-		planets.add(new Goal(200,Math.PI/2, this, 10, 15));
+		sun = new Sun(190);
+		levels.add((Level)reader.readObject("level1.bz"));
+		levels.add((Level)reader.readObject("level2.bz"));
+		levels.add((Level)reader.readObject("level3.bz"));
+		levels.add((Level)reader.readObject("level4.bz"));
 		for (int i = 0; i<10; i++){
-			sparks.add(new Spark(0, 0, this, 0, 0, 0));
+			sparks.add(new Spark(0, 0, 0,0, 0));
 		}
+	}
+	
+	private void loadLevel(Level lev){
+		can = lev.getCannon();
+		planets = lev.getPlanets();
+		
 	}
 	
 	/**
@@ -204,7 +216,7 @@ public class Game extends PApplet{
 	 * Represents the game screen. This screen is displayed when the PLAY button is selected. This is also where level files are read. 
 	 */
 	public void gameScreen(){
-		
+		loadLevel(levels.get(currentLevel));
 		if (!isPaused){
 			background(0);
 			translate(getCentX(),getCentY());
@@ -214,7 +226,7 @@ public class Game extends PApplet{
 			ellipse(0, 0, 30, 30);
 			for (Projectile proj: projectiles){
 				proj.orbit(planets);
-				proj.draw(this);
+				proj.draw(this, this);
 			}
 			Iterator<Projectile> projit= projectiles.iterator();
 			while (projit.hasNext()){
@@ -232,7 +244,12 @@ public class Game extends PApplet{
 			}
 			for (Planet p: planets){
 				p.draw(this);
-				p.orbit();
+				if (p instanceof Goal){
+					((Goal)p).orbit(this);
+				}
+				else{
+					p.orbit();
+				}
 			}
 			for (Spark sp: sparks){
 				sp.act();
@@ -253,6 +270,9 @@ public class Game extends PApplet{
 				winTimer ++;
 			}
 			if (winTimer>60){
+				winTimer = 0;
+				isWon = false;
+				currentLevel++;
 				gamePage = 3;
 			}
 			
@@ -317,6 +337,12 @@ public class Game extends PApplet{
 			
 			
 			
+		}
+		
+		if (gamePage == 3){
+			gamePage = 1;
+			loadLevel(levels.get(currentLevel));
+			projectiles = new ArrayList<Projectile>();
 		}
 		
 		

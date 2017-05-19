@@ -21,12 +21,12 @@ public class Planet extends GameObject implements Serializable{
 	 * @param grav The acceleration due to the gravity of the planet.
 	 * @param size The visual size of the planet.
 	 */
-	public Planet(double radius, double angle, Game g, double grav, double size) {
-		super((g.getCentX()+radius*Math.cos(angle)), (g.getCentY()+radius*Math.cos(angle)), g);
+	public Planet(double radius, double angle, double grav, double size) {
+		super(radius*Math.cos(angle), (radius*Math.cos(angle)));
 		orbitHeight = radius;
 		this.size = size;
 		gravAccel = grav;
-		orbitVelAngular = 3.75*Math.sqrt(Physics.GRAVCONST*g.getSun().getMass()/Math.pow(orbitHeight, 3));
+		orbitVelAngular = 3.75*Math.sqrt(Physics.GRAVCONST*Sun.getMass()/Math.pow(orbitHeight, 3));
 		this.angle = angle;
 		setPosPolar(orbitHeight, angle);
 	}

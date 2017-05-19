@@ -20,8 +20,8 @@ public class Goal extends Planet{
 	 * @param grav
 	 * @param size
 	 */
-	public Goal(double radius, double angle, Game g, double grav, double size) {
-		super(radius, angle, g, grav, size);
+	public Goal(double radius, double angle, double grav, double size) {
+		super(radius, angle, grav, size);
 		// TODO Auto-generated constructor stub
 		isHit = false;
 	}
@@ -29,9 +29,9 @@ public class Goal extends Planet{
 	/**Moves the goal and checks if it's been hit.
 	 * 
 	 */
-	public void orbit(){
+	public void orbit(Game game){
 		super.orbit();
-		for (Projectile proj: super.game.getProjectiles()){
+		for (Projectile proj: game.getProjectiles()){
 			if (distanceTo(proj)<this.size){
 				isHit = true;
 				game.setGoaled(true);

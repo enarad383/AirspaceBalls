@@ -1,5 +1,7 @@
 package gameplayObjects;
 
+import java.io.Serializable;
+
 import functionality.*;
 import processing.core.PApplet;
 
@@ -8,19 +10,16 @@ import processing.core.PApplet;
  * @author enarad383
  *
  */
-public class GameObject {
+public class GameObject implements Serializable {
 	protected double x, y;
 	protected double velX, velY;
 	private double r, angle;
-	private int centX, centY;
-	protected Game game;
+
 	private boolean isVisible;
 	
-	public GameObject(double x, double y, Game g){
+	public GameObject(double x, double y){
 		setPos(x, y);
-		centX = g.getCentX();
-		centY = g.getCentY();
-		game = g;
+
 		isVisible = true;
 	}
 	
