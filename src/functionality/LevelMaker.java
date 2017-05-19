@@ -17,25 +17,25 @@ public class LevelMaker {
 	   Level l4 = new Level(4);
 	   
 	   l1.addCannon(new Cannon(200, 1, 1));
-	   l1.addPlanet(new Goal(200, Math.PI, 10, 20));
+	   l1.addPlanet(new Goal(200, Math.PI, 20, 20));
 	   
 	   l2.addCannon(new Cannon(200, 50, 1));
-	   l2.addPlanet(new Planet(125, 1, 2, 10));
-	   l2.addPlanet(new Planet(400, 0, 15, 20));
-	   l2.addPlanet(new Goal(250, -2, 10, 15));
+	   l2.addPlanet(new Planet(125, 1, 5, 10));
+	   l2.addPlanet(new Planet(400, 0, 30, 20));
+	   l2.addPlanet(new Goal(250, -2, 20, 15));
 	   
 	   l3.addCannon(new Cannon(300, Math.PI, 1));
-	   l3.addPlanet(new Planet(300, 0, 20, 20));
-	   l3.addPlanet(new Planet(150, 1, 10, 10));
-	   l3.addPlanet(new Planet(450, -2, 25, 30));
-	   l3.addPlanet(new Goal(375, Math.PI, 5, 10));
+	   l3.addPlanet(new Planet(300, 0, 40, 20));
+	   l3.addPlanet(new Planet(150, 1, 20, 10));
+	   l3.addPlanet(new Planet(450, -2, 50, 30));
+	   l3.addPlanet(new Goal(375, Math.PI, 10, 10));
 	   
 	   l4.addCannon(new Cannon(400, Math.PI, 1));
-	   l4.addPlanet(new Planet(400, 0, 10, 10));
-	   l4.addPlanet(new Planet(300, 0, 7.5, 7.5));
-	   l4.addPlanet(new Planet(200, 0, 5, 5));
-	   l4.addPlanet(new Planet(100, 0, 2.5, 2.5));
-	   l4.addPlanet(new Goal(200, Math.PI/2, 5, 7));
+	   l4.addPlanet(new Planet(400, 0, 20, 10));
+	   l4.addPlanet(new Planet(300, 0, 15, 7.5));
+	   l4.addPlanet(new Planet(200, 0, 10, 5));
+	   l4.addPlanet(new Planet(100, 0, 5, 2.5));
+	   l4.addPlanet(new Goal(200, Math.PI/2, 10, 7));
 
 	   reader.writeObject("level1.bz", l1);
 	   reader.writeObject("level2.bz", l2);

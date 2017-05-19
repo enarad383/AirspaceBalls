@@ -175,7 +175,17 @@ public class Game extends PApplet{
 		textSize(48);
 		textAlign(CENTER);
 		fill(0,255,0);
-		text("Congratulations, you've won!", 500, 500);
+		text("Level complete! Press space to continue", 500, 500);
+		if (keyPressed){
+			if (key == ' '){
+				gamePage = 1;
+				if (currentLevel<levels.size())
+					loadLevel(levels.get(currentLevel));
+				else
+					gamePage = 0;
+				projectiles = new ArrayList<Projectile>();
+			}
+		}
 	}
 	
 	/**
@@ -353,11 +363,7 @@ public class Game extends PApplet{
 			
 		}
 		
-		if (gamePage == 3){
-			gamePage = 1;
-			loadLevel(levels.get(currentLevel));
-			projectiles = new ArrayList<Projectile>();
-		}
+		
 		
 		
 	}
