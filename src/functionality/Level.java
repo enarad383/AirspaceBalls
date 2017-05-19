@@ -6,16 +6,20 @@ import java.util.ArrayList;
 import gameplayObjects.Cannon;
 import gameplayObjects.Planet;
 import gameplayObjects.Sun;
+import processing.core.PApplet;
 
-public class Level implements Serializable{
+public class Level extends PApplet implements Serializable{
 	
+
 	private int levelNum;
+
 	private Sun sun;
 	private ArrayList<Planet> planets;
 	private Cannon cann;
+
 	
 	public static final long SerialVersionUID = 2;
-	
+
 	
 	/**
 	 * Represents Level or a specific configuration of planets.
@@ -25,6 +29,12 @@ public class Level implements Serializable{
 		planets = new ArrayList<Planet>();
 		levelNum = num;
 	}
+	
+	public void initialize (int num){
+		levelNum = num;
+		planets = new ArrayList<Planet>();
+	}
+	
 	
 	/**
 	 * Add a planet to the level. Use this when making a level. 
@@ -42,22 +52,32 @@ public class Level implements Serializable{
 	 * Add a Sun to the level. Only one sun per level.
 	 * @param g Game object.
 	 */
+
 	public void addSun(Sun s){
 		sun = s;
+
 	}
 	
 	/**
 	 * Add a cannon to the level. Only one cannon per level. 
 	 * @param g Game object.
 	 */
+
 	public void addCannon(Cannon c){
 		cann = c;
 	}
 	
+
 	public Cannon getCannon(){
 		return cann;
 	}
-	
+
+	/**
+	 * Load a new Level.
+	 * 
+	 */
+
+
 	public ArrayList<Planet> getPlanets(){
 		return planets;
 	}
@@ -65,6 +85,7 @@ public class Level implements Serializable{
 	public int getLevelNum(){
 		return levelNum;
 	}
+
 	
 	
 }

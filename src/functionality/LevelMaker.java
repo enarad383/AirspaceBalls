@@ -9,6 +9,7 @@ public class LevelMaker {
 	
 	public static void main(String[] args)
 	  {
+
 	   FileIO reader = new FileIO();
 	   Level l1 = new Level(1);
 	   Level l2 = new Level(2);
@@ -40,7 +41,8 @@ public class LevelMaker {
 	   reader.writeObject("level2.bz", l2);
 	   reader.writeObject("level3.bz", l3);
 	   reader.writeObject("level4.bz", l4);
-	   
+
+	   System.out.println("MADE");
 	   
 	  }
 	

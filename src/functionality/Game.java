@@ -33,7 +33,11 @@ public class Game extends PApplet{
 	private boolean isWon;
 	
 	private int gamePage;
+
+	private int lvlNum;
+
 	
+
 	
 	private MenuButtons menu;
 
@@ -57,7 +61,7 @@ public class Game extends PApplet{
 		winTimer = 0;
 		currentLevel = 0;
 		
-		
+		lvlNum = 1;
 
 	}
 	/**
@@ -124,7 +128,7 @@ public class Game extends PApplet{
 		if (gamePage == 0){
 			menuScreen();
 		} else if (gamePage == 1){
-			
+			//levelTest();
 			gameScreen();
 		} else if (gamePage == 2){
 			instrScreen();
@@ -204,7 +208,7 @@ public class Game extends PApplet{
 				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
-		text("'->' = Turn clockwise \n'<-' = Turn counterclockwise \n'SPACE' = Shoot \n", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
+		text("LEFT & RIGHT ARROWS = Turn the cannon. \nSPACE = Fire the projectile.", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
 		
@@ -311,6 +315,16 @@ public class Game extends PApplet{
 			
 		}
 	}
+	
+	public void levelTest(){
+		
+		//Level lvl = Level.loadState();
+		//lvl.initialize(lvlNum);
+		
+		
+	}
+	
+	
 	
 	/**
 	 * Fires a projectile from the cannon.
