@@ -27,6 +27,7 @@ public class Game extends PApplet{
 	
 	private int shootTimer;
 	private int winTimer;
+	private int debugTimer;
 	
 	private boolean isPaused;
 	private boolean isDebug;
@@ -34,7 +35,6 @@ public class Game extends PApplet{
 	
 	private int gamePage;
 
-	private int lvlNum;
 
 	
 
@@ -61,7 +61,6 @@ public class Game extends PApplet{
 		winTimer = 0;
 		currentLevel = 0;
 		
-		lvlNum = 1;
 
 	}
 	/**
@@ -105,6 +104,7 @@ public class Game extends PApplet{
 	 * Modify the Debug value. 
 	 */
 	public void setDebug(){
+		debugTimer = 10;
 		isDebug = !isDebug;
 	}
 	
@@ -165,8 +165,18 @@ public class Game extends PApplet{
 	 */
 	public void menuScreen(){
 		background(0);
+		
 		menu = new MenuButtons (this);
 		menu.draw(this);
+		textSize(60);
+		textAlign(CENTER);
+		fill(255, 0, 0);
+		for (int i = 10; i>0; i--){
+			fill (25*i, 0, 0);
+			text("AIRSPACE BALLS", 500+0.5f*i, 350+2*i);
+			text("AIRSPACE BALLS", 500-0.5f*i, 350-2*i);
+		}
+		
 		textSize(10);
 	}
 	
@@ -179,10 +189,14 @@ public class Game extends PApplet{
 		if (keyPressed){
 			if (key == ' '){
 				gamePage = 1;
-				if (currentLevel<levels.size())
+				if (currentLevel<levels.size()){
+					shootTimer = 10;
 					loadLevel(levels.get(currentLevel));
-				else
+				}
+				else{
 					gamePage = 0;
+					currentLevel = 0;
+				}
 				projectiles = new ArrayList<Projectile>();
 			}
 		}
@@ -218,7 +232,7 @@ public class Game extends PApplet{
 				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
-		text("LEFT & RIGHT ARROWS = Turn the cannon. \nSPACE = Fire the projectile.", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
+		text("LEFT & RIGHT ARROWS = Turn the cannon. \nSPACE = Fire the projectile. \nBACKSPACE = Exit menu.", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
 		
@@ -274,11 +288,17 @@ public class Game extends PApplet{
 			if (isDebug){
 				textAlign(LEFT);
 				fill(0, 255, 0);
+				textSize(12);
 				text("FPS: " + frameRate, -450, -450);
+				text("Level: " + (currentLevel+1), -450, -430);
+				text("Num projectiles: " + projectiles.size(), -450, -410);
 				
 			}
 			if (shootTimer>0){
 				shootTimer--;
+			}
+			if (debugTimer>0){
+				debugTimer--;
 			}
 			if (isWon){
 				winTimer ++;
@@ -302,7 +322,7 @@ public class Game extends PApplet{
 			if (key == 'u'){
 				isPaused = false;
 			}
-			if (key == 'd'){
+			if (key == 'd' && debugTimer == 0){
 				setDebug();
 			}
 			if (keyCode == UP){
