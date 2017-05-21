@@ -171,7 +171,10 @@ public class Game extends PApplet{
 	 */
 	public void menuScreen(){
 		background(0);
-		
+		currentLevel = 0;
+		hud.resetLevel();
+		hud.resetShots();
+		hud.resetScore();
 		menu = new MenuButtons (this);
 		menu.draw(this);
 		textSize(60);
@@ -201,23 +204,33 @@ public class Game extends PApplet{
 		textSize(48);
 		textAlign(CENTER);
 		fill(0,255,0);
-		text("Your score is : " + hud.getScore(), 500, 440);
-		text("Press space to continue", 500, 560);
-		if (keyPressed){
-			if (key == ' '){
-				gamePage = 1;
-				if (currentLevel<levels.size()){
-					shootTimer = 10;
-					loadLevel(levels.get(currentLevel));
-					hud.resetShots();
-					hud.addLevel();
+		if(currentLevel != 7){
+			
+		
+			text("Your score is : " + hud.getScore(), 500, 440);
+			text("Press space to continue", 500, 560);
+			if (keyPressed){
+				if (key == ' '){
+					gamePage = 1;
+					if (currentLevel<levels.size()){
+						shootTimer = 10;
+						loadLevel(levels.get(currentLevel));
+						hud.resetShots();
+						hud.addLevel();
+					}
+					else{
+						gamePage = 0;
+						currentLevel = 0;
+					}
+					projectiles = new ArrayList<Projectile>();
 				}
-				else{
-					gamePage = 0;
-					currentLevel = 0;
-				}
-				projectiles = new ArrayList<Projectile>();
 			}
+		} else {
+			text("Your final score is : " + hud.getScore(), 500, 440);
+			text("Press backspace to return to menu", 500, 560);
+			//currentLevel = 0;
+			hud.resetShots();
+			//hud.resetLevel();
 		}
 		
 		

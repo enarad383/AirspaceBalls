@@ -71,10 +71,27 @@ public class GameHUD extends PApplet
 		shots = 0;
 	}
 	
+	/**
+	 * Gets the current score.
+	 * @return The total amount of shots taken.
+	 */
 	public int getScore(){
 		return totalShots;
 	}
 	
+	/**
+	 * Resets the level number to 0.
+	 */
+	public void resetLevel(){
+		level = 0;
+	}
+	
+	/**
+	 * Resets the score to 0;
+	 */
+	public void resetScore(){
+		totalShots = 0;
+	}
 	
 
 }
