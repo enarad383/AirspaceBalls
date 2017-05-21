@@ -1,5 +1,6 @@
 package functionality;
 
+import java.io.File;
 import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -60,6 +61,7 @@ public class Game extends PApplet{
 		shootTimer = 0;
 		winTimer = 0;
 		currentLevel = 0;
+		
 		
 
 	}
@@ -187,6 +189,9 @@ public class Game extends PApplet{
 		textSize(10);
 	}
 	
+	/**
+	 * Represents the win screen, only seen after completing a level. 
+	 */
 	public void winScreen(){
 		background(0);
 		textAlign(CENTER);
@@ -199,7 +204,8 @@ public class Game extends PApplet{
 		textSize(48);
 		textAlign(CENTER);
 		fill(0,255,0);
-		text("Press space to continue", 500, 500);
+		text("Your score is : " + hud.getScore(), 500, 440);
+		text("Press space to continue", 500, 560);
 		if (keyPressed){
 			if (key == ' '){
 				gamePage = 1;
@@ -252,7 +258,7 @@ public class Game extends PApplet{
 				+ "one to fine-tune their skills at aiming.", (sketchWidth()*3)/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
-		text("LEFT & RIGHT ARROWS = Turn the cannon. \nSPACE = Fire the projectile. \nBACKSPACE = Exit menu.", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
+		text("BACKSPACE = Exit to main menu. \n\nLEFT & RIGHT ARROWS = Turn the cannon. \nUP & DOWN ARROWS = Adjust cannon power. \nSPACE = Fire the projectile. \n\nD = Debug mode. \nP = Pause. ", (sketchWidth())/4 -140, (sketchHeight())/4 + 25, (sketchWidth())/4+125, (sketchHeight())/2);
 		
 		
 		
@@ -310,6 +316,7 @@ public class Game extends PApplet{
 			for (Spark sp: sparks){
 				sp.act();
 				sp.draw(this);
+				
 			}
 			can.orbit();
 			can.draw(this);
@@ -318,8 +325,8 @@ public class Game extends PApplet{
 				fill(0, 255, 0);
 				textSize(12);
 				text("FPS: " + frameRate, -450, -450);
-				text("Level: " + (currentLevel+1), -450, -430);
 				text("Num projectiles: " + projectiles.size(), -450, -410);
+				text("Power: " + Math.round(can.getPower()), -450, -390);
 				
 			}
 			if (shootTimer>0){

@@ -23,15 +23,12 @@ public class LevelMaker {
 	   l1.addCannon(new Cannon(200, 1, 1));
 	   l1.addPlanet(new Goal(200, Math.PI, 20, 20));
 	   
-	   l7.addCannon(new Cannon(120, 1, 1));
-	   l7.addPlanet(new Goal(200, Math.PI, 20, 20));
-	   
 	   l2.addCannon(new Cannon(200, 50, 1));
 	   l2.addPlanet(new Planet(125, 1, 5, 10));
 	   l2.addPlanet(new Planet(400, 0, 30, 20));
 	   l2.addPlanet(new Goal(250, -2, 20, 15));
 	   
-	   l3.addCannon(new Cannon(300, Math.PI, 1));
+	   l3.addCannon(new Cannon(300, Math.PI/2, 1));
 	   l3.addPlanet(new Planet(300, 0, 40, 20));
 	   l3.addPlanet(new Planet(150, 1, 20, 10));
 	   l3.addPlanet(new Planet(450, -2, 50, 30));
@@ -52,7 +49,7 @@ public class LevelMaker {
 	   l5.addPlanet(new Planet(460, 0, 26, 25));
 	   l5.addPlanet(new Goal(200, Math.PI/2, 10, 7));
 	   
-	   l6.addCannon(new Cannon(50, Math.PI, 1));
+	   l6.addCannon(new Cannon(125, Math.PI, 1));
 	   l6.addPlanet(new Planet(400, 0, 30, 30));
 	   l6.addPlanet(new Planet(300, 0, 33, 36));
 	   l6.addPlanet(new Planet(200, 0, 10, 5));
