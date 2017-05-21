@@ -35,11 +35,11 @@ public class Game extends PApplet{
 	
 	private int gamePage;
 
-
-	
-
-	
 	private MenuButtons menu;
+	private GameHUD hud;
+
+	
+	
 
 	/**
 	 * Represents the Game.
@@ -84,11 +84,16 @@ public class Game extends PApplet{
 	 */
 	public void setup(){
 		
+		hud = new GameHUD();
+		
 		sun = new Sun(190);
 		levels.add((Level)reader.readObject("level1.bz"));
 		levels.add((Level)reader.readObject("level2.bz"));
 		levels.add((Level)reader.readObject("level3.bz"));
 		levels.add((Level)reader.readObject("level4.bz"));
+		levels.add((Level)reader.readObject("level5.bz"));
+		levels.add((Level)reader.readObject("level6.bz"));
+		levels.add((Level)reader.readObject("level7.bz"));
 		for (int i = 0; i<10; i++){
 			sparks.add(new Spark(0, 0, 0,0, 0));
 		}
@@ -119,6 +124,8 @@ public class Game extends PApplet{
 	public boolean isDebug(){
 		return isDebug;
 	}
+	
+	
 	
 	/**
 	 * Represents what is drawn in the window. Which screen is being displayed. 
@@ -199,6 +206,8 @@ public class Game extends PApplet{
 				if (currentLevel<levels.size()){
 					shootTimer = 10;
 					loadLevel(levels.get(currentLevel));
+					hud.resetShots();
+					hud.addLevel();
 				}
 				else{
 					gamePage = 0;
@@ -207,6 +216,10 @@ public class Game extends PApplet{
 				projectiles = new ArrayList<Projectile>();
 			}
 		}
+		
+		
+		
+		
 	}
 	
 	/**
@@ -252,8 +265,16 @@ public class Game extends PApplet{
 	 */
 	public void gameScreen(){
 		loadLevel(levels.get(currentLevel));
+		
+		
+		
+		hud.draw(this);
+		
+		
+		
 		if (!isPaused){
 			background(0);
+			hud.draw(this);
 			translate(getCentX(),getCentY());
 			sun.draw(this);
 			strokeWeight(1);
@@ -353,15 +374,6 @@ public class Game extends PApplet{
 		}
 	}
 	
-	public void levelTest(){
-		
-		//Level lvl = Level.loadState();
-		//lvl.initialize(lvlNum);
-		
-		
-	}
-	
-	
 	
 	/**
 	 * Fires a projectile from the cannon.
@@ -371,6 +383,7 @@ public class Game extends PApplet{
 				can.getVelX()+can.getPower()*Math.cos(can.getAimAngle()),
 				can.getVelY()+can.getPower()*Math.sin(can.getAimAngle())));
 		shootTimer = 20;
+		hud.addShot();
 	}
 	
 	
